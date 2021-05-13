@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Box, Link, Stack, Text } from '@chakra-ui/layout';
+import React from 'react';
+import { Box, Link, Text } from '@chakra-ui/layout';
 import { Button, Flex, Image, VStack } from '@chakra-ui/react';
 
 import { Heading } from '@chakra-ui/react';

@@ -1,6 +1,6 @@
-import { TabPanel, HStack, Heading, Text, Progress } from '@chakra-ui/react';
+import { HStack, Text, Progress } from '@chakra-ui/react';
 import React from 'react';
-import { FaVenus, FaMars } from 'react-icons/fa';
+
 
 export default function TabInfoStats({ pokemonInfo}) {
     return (

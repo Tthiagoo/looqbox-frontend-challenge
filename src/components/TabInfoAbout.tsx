@@ -1,4 +1,4 @@
-import { TabPanel, HStack, Heading, Text } from '@chakra-ui/react';
+import { HStack, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 import { FaVenus, FaMars } from 'react-icons/fa';
 

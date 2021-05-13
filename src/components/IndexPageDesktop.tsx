@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Link, Stack, Text } from '@chakra-ui/layout';
+import { Box, Link, Text } from '@chakra-ui/layout';
 import { Button, Flex, Image, useColorModeValue } from '@chakra-ui/react';
 import { Heading } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';

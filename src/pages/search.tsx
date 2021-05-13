@@ -158,7 +158,7 @@ export default function Search() {
                     pt="1%"
                 >
                     {pokemons.map((poke, index) => (
-                        <ScaleFade initialScale={0.9} in={true}>
+                        <ScaleFade initialScale={0.9} key={index} in={true}>
                             <CardPokemon namePokemon={poke.name} key={index} />
                         </ScaleFade>
                     ))}
