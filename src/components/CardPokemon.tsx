@@ -1,10 +1,10 @@
 import { Flex, Heading, Image, Link, Tag } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { typePokemon } from '../constants/typePokemon';
 import { bgColor } from '../constants/bgColor';
 import { api } from '../api/api';
 
-export default function CardPokemon({ namePokemon }) {
+function CardPokemon({ namePokemon }) {
     const [typesData, setTypesData] = useState([]);
     const [typePrimary, setTypePrimary] = useState('');
 
@@ -61,6 +61,7 @@ export default function CardPokemon({ namePokemon }) {
                             <Tag
                                 key={index}
                                 size="md"
+                                width={{ xl: '70%' }}
                                 mt="18%"
                                 variant="solid"
                                 backgroundColor={typePokemon[type]}
@@ -83,3 +84,4 @@ export default function CardPokemon({ namePokemon }) {
         </Flex>
     );
 }
+export default memo(CardPokemon)
