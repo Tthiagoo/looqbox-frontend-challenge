@@ -47,7 +47,7 @@ function CardPokemon({ namePokemon }) {
                     <Link href={`/pokemon/${namePokemon}`}>{namePokemon}</Link>
                 </Heading>
             </Flex>
-            <Flex flexDirection="row" w="100%" h="75%">
+            <Flex flexDirection="row" w="100%" h={{ base: '75%', xl: '80%' }}>
                 <Flex
                     height="100%"
                     w="50%"
@@ -61,7 +61,7 @@ function CardPokemon({ namePokemon }) {
                             <Tag
                                 key={index}
                                 size="md"
-                                width={{ xl: '70%' }}
+                                width={{ xl: '85%' }}
                                 mt="18%"
                                 variant="solid"
                                 backgroundColor={typePokemon[type]}
@@ -73,15 +73,21 @@ function CardPokemon({ namePokemon }) {
                 </Flex>
                 <Flex
                     height="100%"
-                    w="50%"
+                    w={{ base: '50%', xl: '100%' }}
                     alignItems="center"
                     justifyContent="flex-end"
-                    p="2%"
+                    p={{ base: '2%', xl: '1.5%' }}
+                    mr={{ xl: '10%' }}
                 >
-                    <Image objectFit="cover" w="100%" h="73%" src={sprite} />
+                    <Image
+                        objectFit="cover"
+                        w={{ base: '100%', xl: '75%' }}
+                        h={{ base: '73%', lg: '92%', xl: '100%' }}
+                        src={sprite}
+                    />
                 </Flex>
             </Flex>
         </Flex>
     );
 }
-export default memo(CardPokemon)
+export default memo(CardPokemon);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SearchIcon } from '@chakra-ui/icons';
-import { Heading} from '@chakra-ui/layout';
+import { Heading } from '@chakra-ui/layout';
 import {
     Box,
     Flex,
@@ -13,7 +13,6 @@ import {
     Button,
     useToast,
     ScaleFade,
-   
 } from '@chakra-ui/react';
 import { ButtonColorMode } from '../components/ButtonColorMode';
 import CardPokemon from '../components/CardPokemon';
@@ -33,7 +32,7 @@ export default function Search() {
             const response = await api.get(`pokemon/${nameLower}`);
             setPokemons([response.data]);
         } catch (err) {
-            setPokemons([])
+            setPokemons([]);
             return toast({
                 title: 'Error ',
                 description: 'Nenhum pokemon encontrado',
@@ -48,7 +47,7 @@ export default function Search() {
         try {
             const response = await api.get(`pokemon?offset=${page}&limit=4`);
             const { results } = response.data;
-            
+
             setPokemons(oldValues => {
                 return [...oldValues, ...results];
             });
@@ -83,7 +82,7 @@ export default function Search() {
                 justifyContent="center"
                 alignSelf={{ xl: 'center' }}
                 flexDirection="column"
-                p="5%"
+                p={{ base: '5%', xl: '3.5%' }}
                 w={{ xl: '90%' }}
             >
                 <Heading mb="15px">Pokedex</Heading>
@@ -131,11 +130,11 @@ export default function Search() {
                 justifyContent="center"
                 alignItems="center"
                 backgroundColor={bgSearch}
-                m="15px"
+                m={{ base: '15px', xl: '8px' }}
                 borderRadius="10px"
-                w={{ xl: '80%' }}
+                w={{ xl: '95%' }}
                 overflow="hidden"
-                p="2%"
+                p={{ base: '3.5%', xl: '1%' }}
                 style={{
                     boxShadow: '10px 10px -5px 0px rgba(0,0,0,0.50)',
                 }}
