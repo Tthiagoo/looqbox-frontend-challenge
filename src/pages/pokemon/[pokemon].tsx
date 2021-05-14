@@ -1,13 +1,7 @@
 import React from 'react';
-
+import { FaArrowLeft } from 'react-icons/fa';
 import { Heading } from '@chakra-ui/layout';
-import {
-    Box,
-    Flex,
-    Image,
-    HStack,
-    Tag,
-} from '@chakra-ui/react';
+import { Box, Flex, Image, HStack, Tag, Link } from '@chakra-ui/react';
 
 import { api } from '../../api/api';
 import { useRouter } from 'next/router';
@@ -48,9 +42,7 @@ export const getStaticProps: GetStaticProps = async context => {
 export default function Pokemon({ poke }) {
     const { isFallback } = useRouter();
     if (isFallback) {
-        return (
-            <ShimmerEffect/>
-        );
+        return <ShimmerEffect />;
     }
     const pokemonImage = poke.sprites.other.dream_world.front_default;
     const primary = poke.types[0].type.name;
@@ -71,6 +63,16 @@ export default function Pokemon({ poke }) {
                     flexDirection="column"
                     borderRadius={{ xl: '30px' }}
                 >
+                    <Box
+                        w="100%"
+                        h="4%"
+                        pl={{ base: '5%', xl: '4%' }}
+                        pt={{ base: '4%', xl: '2%' }}
+                    >
+                        <Link href="/search">
+                            <FaArrowLeft size={30} color={'#fff'} />
+                        </Link>
+                    </Box>
                     <Flex
                         w="100%"
                         h="10%"
