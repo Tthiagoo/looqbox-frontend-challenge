@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaArrowLeft } from 'react-icons/fa';
+
 import { Heading } from '@chakra-ui/layout';
 import { Box, Flex, Image, HStack, Tag, Link } from '@chakra-ui/react';
 
@@ -10,6 +10,7 @@ import TabInfo from '../../components/TabInfo';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { typePokemon } from '../../constants/typePokemon';
 import ShimmerEffect from '../../components/shimmer';
+import { FaArrowLeft } from 'react-icons/fa';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const response = await fetch('https://pokeapi.co/api/v2/pokemon/');

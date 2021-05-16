@@ -8,42 +8,46 @@ import {
     Input,
     InputLeftElement,
     InputGroup,
-    Grid,
     useColorModeValue,
-    Button,
     useToast,
-    ScaleFade,
 } from '@chakra-ui/react';
 import { ButtonColorMode } from '../components/ButtonColorMode';
-import CardPokemon from '../components/CardPokemon';
+import ButtonCustomSearch from '../components/ButtomCustomSearch';
+
 import { api } from '../api/api';
+import ButtomCustomLoad from '../components/ButtomCustomLoad';
+import GridPokemon from '../components/GridPokemon';
 
 export default function Search() {
-    const toast = useToast();
     const bgSearch = useColorModeValue('gray.100', 'gray.700');
     const [namePokemon, setNamePokemon] = useState('');
     const [pokemons, setPokemons] = useState([]);
     const [page, setPage] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const toast = useToast();
 
     async function handleSearch() {
-        setPage(0);
+        setLoading(true);
         try {
             const nameLower = namePokemon.toLocaleLowerCase();
             const response = await api.get(`pokemon/${nameLower}`);
             setPokemons([response.data]);
+            setLoading(false);
+            setPage(0);
         } catch (err) {
-            setPokemons([]);
+            setLoading(false);
             return toast({
                 title: 'Error ',
-                description: 'Nenhum pokemon encontrado',
+                description: 'Nenhum pokémon encontrado',
                 status: 'error',
-                duration: 5000,
+                duration: 3000,
                 isClosable: true,
             });
         }
     }
 
     async function LoadList() {
+        setLoading(true);
         try {
             const response = await api.get(`pokemon?offset=${page}&limit=4`);
             const { results } = response.data;
@@ -51,8 +55,8 @@ export default function Search() {
             setPokemons(oldValues => {
                 return [...oldValues, ...results];
             });
-
             setPage(page + 4);
+            setLoading(false);
         } catch (error) {
             console.log(error);
         }
@@ -100,26 +104,11 @@ export default function Search() {
                             onChange={e => setNamePokemon(e.target.value)}
                         />
                     </InputGroup>
-                    <Button
-                        backgroundColor="black"
-                        color="white"
-                        ml="20px"
-                        onClick={() =>
-                            namePokemon
-                                ? handleSearch()
-                                : toast({
-                                      title: 'Error',
-                                      description:
-                                          'Digite um nome de algum pokemon',
-                                      status: 'error',
-                                      duration: 5000,
-                                      isClosable: true,
-                                  })
-                        }
-                    >
-                        {' '}
-                        Pesquisar
-                    </Button>
+                    <ButtonCustomSearch
+                        Loading={loading}
+                        search={handleSearch}
+                        pokeName={namePokemon}
+                    />
                 </Flex>
             </Flex>
 
@@ -135,45 +124,15 @@ export default function Search() {
                 w={{ xl: '95%' }}
                 overflow="hidden"
                 p={{ base: '3.5%', xl: '1%' }}
-                style={{
-                    boxShadow: '10px 10px -5px 0px rgba(0,0,0,0.50)',
-                }}
             >
-                <Grid
-                    overflowY="scroll"
-                    templateColumns={{
-                        base: 'repeat(2, 10fr)',
-                        md: 'repeat(3, 10fr)',
-                        lg: 'repeat(4, 10fr)',
-                        xl: 'repeat(5, 10fr)',
-                    }}
-                    id="Grid"
-                    w="100%"
-                    gap={4}
-                    pt="1%"
-                >
-                    {pokemons.map((poke, index) => (
-                        <ScaleFade initialScale={0.9} key={index} in={true}>
-                            <CardPokemon namePokemon={poke.name} key={index} />
-                        </ScaleFade>
-                    ))}
-                </Grid>
+                <GridPokemon pokeList={pokemons} />
 
-                {namePokemon ? (
-                    <Box />
-                ) : (
-                    <Box>
-                        <Button
-                            backgroundColor="black"
-                            onClick={LoadList}
-                            mt="10%"
-                            color="white"
-                            ml="20px"
-                        >
-                            Carregar mais pokemons
-                        </Button>
-                    </Box>
-                )}
+                <Box>
+                    <ButtomCustomLoad
+                        Loading={loading}
+                        functionLoad={LoadList}
+                    />
+                </Box>
             </Flex>
         </Flex>
     );
